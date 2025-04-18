@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-neutral-800);
+  --font-sans: var(--font-inter);
+
+  --color-primary: #1da6e5;
+  --color-secondary: #033146;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+button:disabled {
+  @apply cursor-not-allowed;
+}
