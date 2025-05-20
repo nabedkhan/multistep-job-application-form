@@ -37,7 +37,25 @@ export default function CvCoverTabContent({ handlePreviousTab }: CvCoverTabConte
 
   useEffect(() => {
     if (!content || isLoading) return;
-    setValue("coverLetter", content);
+
+    let timeoutId: NodeJS.Timeout;
+    let currentIndex = 0;
+
+    const typeWriter = () => {
+      if (currentIndex < content.length) {
+        setValue("coverLetter", content.substring(0, currentIndex + 1));
+        currentIndex++;
+        timeoutId = setTimeout(typeWriter, 2);
+      }
+    };
+
+    typeWriter();
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [content, isLoading, setValue]);
 
   return (

@@ -4,6 +4,8 @@ interface RequestBody {
   content: string;
 }
 
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 export async function POST(req: Request) {
   try {
     const { content }: RequestBody = await req.json();
@@ -11,8 +13,6 @@ export async function POST(req: Request) {
     if (!content) {
       return Response.json({ error: "Content is required" }, { status: 400 });
     }
-
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
